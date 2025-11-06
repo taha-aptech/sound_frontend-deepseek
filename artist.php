@@ -139,7 +139,7 @@ if ($artist_id > 0) {
                 <div class="col-lg-3 col-md-4 col-sm-6 mb-4" data-aos="fade-up">
                     <div class="card artist-card h-100 text-center">
                         <a href="artist.php?id=<?php echo $artist['artist_id']; ?>" class="text-decoration-none text-dark">
-                            <img src="<?php echo $artist['artist_image'] ?: 'images/artist/default.jpg'; ?>" 
+                            <img src="images/<?php echo $artist['artist_image'] ?: 'images/artist/default.jpg'; ?>" 
                                  class="card-img-top" alt="<?php echo $artist['artist_name']; ?>">
                             <div class="card-body">
                                 <h5 class="card-title"><?php echo $artist['artist_name']; ?></h5>

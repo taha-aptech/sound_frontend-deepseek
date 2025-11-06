@@ -3,7 +3,7 @@
 include 'header.php';
 
 // Fetch latest music (5 tracks)
-$latest_music_query = "SELECT m.*, a.artist_name, g.genre_name, al.album_name 
+$latest_music_query = "SELECT m.*, a.artist_name, g.genre_name, al.album_name, al.cover_image
                       FROM music m 
                       LEFT JOIN artist a ON m.artist_id = a.artist_id 
                       LEFT JOIN genre g ON m.genre_id = g.genre_id 
@@ -13,7 +13,7 @@ $latest_music_query = "SELECT m.*, a.artist_name, g.genre_name, al.album_name
 $latest_music_result = mysqli_query($conn, $latest_music_query);
 
 // Fetch latest videos (5 videos)
-$latest_videos_query = "SELECT v.*, a.artist_name, g.genre_name, al.album_name 
+$latest_videos_query = "SELECT v.*, a.artist_name, g.genre_name, al.album_name,  al.cover_image
                        FROM video v 
                        LEFT JOIN artist a ON v.artist_id = a.artist_id 
                        LEFT JOIN genre g ON v.genre_id = g.genre_id 
@@ -46,7 +46,7 @@ $latest_videos_result = mysqli_query($conn, $latest_videos_query);
                     <?php if($music['is_new']): ?>
                         <span class="new-badge">NEW</span>
                     <?php endif; ?>
-                    <img src="<?php echo $music['thumbnail_img'] ?: 'images/thumbnail_img/default-music.jpg'; ?>" class="card-img-top" alt="<?php echo $music['title']; ?>">
+                    <img src="images/<?php echo $music['cover_image'] ?: 'images/music/mashup.jpg'; ?>" class="card-img-top" alt="<?php echo $music['title']; ?>">
                     <div class="card-body">
                         <h5 class="card-title"><?php echo $music['title']; ?></h5>
                         <p class="card-text text-muted"><?php echo $music['artist_name']; ?></p>
@@ -79,7 +79,7 @@ $latest_videos_result = mysqli_query($conn, $latest_videos_query);
                     <?php if($video['is_new']): ?>
                         <span class="new-badge">NEW</span>
                     <?php endif; ?>
-                    <img src="<?php echo $video['thumbnail_img'] ?: 'images/thumbnail_img/default-video.jpg'; ?>" class="card-img-top" alt="<?php echo $video['title']; ?>">
+                    <img src="images/<?php echo $video['cover_image'] ?: 'images/album/mashup.jpeg'; ?>" class="card-img-top" alt="<?php echo $video['title']; ?>">
                     <div class="card-body">
                         <h5 class="card-title"><?php echo $video['title']; ?></h5>
                         <p class="card-text text-muted"><?php echo $video['artist_name']; ?></p>
@@ -109,7 +109,7 @@ $latest_videos_result = mysqli_query($conn, $latest_videos_query);
                 <a href="about.php" class="btn btn-primary">Learn More</a>
             </div>
             <div class="col-md-6" data-aos="fade-left">
-                <img src="images/about-img.jpg" alt="About SOUND Entertainment" class="img-fluid rounded shadow">
+                <img src="images/about-img.png"  width="350px" alt="About SOUND Entertainment" class="img-fluid rounded shadow ms-5">
             </div>
         </div>
     </div>

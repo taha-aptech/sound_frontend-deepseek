@@ -68,10 +68,53 @@ body {
     padding: 20px;
 }
 
+/* Improved Rating Styles */
 .rating-stars {
+    color: #FFD700; /* Gold color for stars */
+    font-size: 0.9rem;
+}
+
+.rating-stars .fas.fa-star,
+.rating-stars .fas.fa-star-half-alt {
     color: #FFD700;
 }
 
+.rating-stars .far.fa-star {
+    color: #ddd;
+}
+
+.rating-container .rating-star {
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    margin-right: 2px;
+}
+
+.rating-container .rating-star.text-warning {
+    color: #FFD700 !important;
+}
+
+.rating-container .rating-star.text-muted {
+    color: #ddd !important;
+}
+
+.rating-container .rating-star:hover {
+    transform: scale(1.2);
+    color: #FFD700 !important;
+}
+
+/* Fix modal z-index issues */
+.modal {
+    z-index: 1060;
+}
+
+.modal-backdrop {
+    z-index: 1050;
+}
+
+/* Ensure modal is properly positioned */
+.modal-dialog {
+    margin: 1.75rem auto;
+}
 .section-title {
     position: relative;
     padding-bottom: 15px;

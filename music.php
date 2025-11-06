@@ -9,7 +9,7 @@ $artist = isset($_GET['artist']) ? intval($_GET['artist']) : 0;
 $year = isset($_GET['year']) ? intval($_GET['year']) : 0;
 
 // Build query
-$music_query = "SELECT m.*, a.artist_name, g.genre_name, al.album_name 
+$music_query = "SELECT m.*, a.artist_name, g.genre_name, al.album_name, al.cover_image
                FROM music m 
                LEFT JOIN artist a ON m.artist_id = a.artist_id 
                LEFT JOIN genre g ON m.genre_id = g.genre_id 
@@ -99,7 +99,7 @@ $years = mysqli_query($conn, "SELECT DISTINCT year FROM music ORDER BY year DESC
                         <?php if($music['is_new']): ?>
                             <span class="new-badge">NEW</span>
                         <?php endif; ?>
-                        <img src="<?php echo $music['thumbnail_img'] ?: 'images/thumbnail_img/default-music.jpg'; ?>" class="card-img-top" alt="<?php echo $music['title']; ?>">
+                        <img src="images/<?php echo $music['cover_image'] ?: 'images/thumbnail_img/default-music.jpg'; ?>" class="card-img-top" alt="<?php echo $music['title']; ?>">
                         <div class="card-body">
                             <h5 class="card-title"><?php echo $music['title']; ?></h5>
                             <p class="card-text text-muted"><?php echo $music['artist_name']; ?></p>

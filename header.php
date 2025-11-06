@@ -5,23 +5,40 @@ require_once 'db.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SOUND Entertainment</title>
-    
+
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
+
     <!-- AOS CSS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
+
+    <!-- Add this to header.php before </head> -->
+    <script>
+        // Global variable to check login status
+        const USER_LOGGED_IN = <?php echo (isset($_SESSION['user_id']) && isset($_SESSION['loggedin'])) ? 'true' : 'false'; ?>;
+        const USER_ID = <?php echo isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 0; ?>;
+
+        // Add logged-in class to body for CSS detection
+        document.addEventListener('DOMContentLoaded', function() {
+            if (USER_LOGGED_IN) {
+                document.body.classList.add('user-logged-in');
+            }
+        });
+    </script>
+
 </head>
+
 <body>
     <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #16476A;">
@@ -56,18 +73,21 @@ require_once 'db.php';
                     <li class="nav-item">
                         <a class="nav-link" href="about.php">About</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.php">Contact</a>
+                    </li>
                 </ul>
-                
+
                 <ul class="navbar-nav">
                     <?php if (isset($_SESSION['user_id']) || isset($_SESSION['admin_id'])): ?>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
                                 <i class="fas fa-user me-1"></i>
-                                <?php 
+                                <?php
                                 if (isset($_SESSION['user_id'])) {
-                                    echo $_SESSION['name'];
+                                    echo $_SESSION['username'];
                                 } else {
-                                    echo $_SESSION['admin_name'];
+                                    echo $_SESSION['name'];
                                 }
                                 ?>
                             </a>
@@ -76,7 +96,9 @@ require_once 'db.php';
                                 <?php if (isset($_SESSION['admin_id'])): ?>
                                     <li><a class="dropdown-item" href="admin/">Admin Panel</a></li>
                                 <?php endif; ?>
-                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
                                 <li><a class="dropdown-item" href="logout.php">Logout</a></li>
                             </ul>
                         </li>
@@ -92,6 +114,23 @@ require_once 'db.php';
             </div>
         </div>
     </nav>
+<!-- Add this after navbar in header.php -->
+<div class="container mt-3">
+    <?php if(isset($_SESSION['success'])): ?>
+        <div class="alert alert-success alert-dismissible fade show auto-dismiss" role="alert">
+            <?php echo $_SESSION['success']; ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+        <?php unset($_SESSION['success']); ?>
+    <?php endif; ?>
     
+    <?php if(isset($_SESSION['error'])): ?>
+        <div class="alert alert-danger alert-dismissible fade show auto-dismiss" role="alert">
+            <?php echo $_SESSION['error']; ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+        <?php unset($_SESSION['error']); ?>
+    <?php endif; ?>
+</div>
     <!-- Main Content -->
     <main class="container-fluid px-0">
